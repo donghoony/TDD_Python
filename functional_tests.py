@@ -1,6 +1,8 @@
 import unittest
 from selenium import webdriver
+from selenium.webdriver import Keys
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
 url = "http://localhost:8000"
@@ -25,17 +27,31 @@ class NewVisitorTest(unittest.TestCase):
 
         # 그는 홈페이지의 제목을 확인한다
         self.assertIn("To-Do", self.browser.title)
-        # self.fail("Finish the test!") # always fails in here
+        header_text = self.browser.find_element(By.TAG_NAME, "h1").text
+        self.assertIn("To-Do", header_text)
 
         # 그는 To-Do List에 아이템을 만든다.
+        input_box = self.browser.find_element(By.ID, "id_new_item")
+        self.assertEqual(
+            input_box.get_attribute("placeholder"),
+            "Enter a To-do item"
+        )
 
         # "시장에서 우유 사기"라는 문장을 TextBox에 작성한다.
+        input_box.send_keys("시장에서 우유 사기")
 
         # 그가 Enter를 누르는 순간, 페이지가 업데이트되고 페이지에
         # "1. 시장에서 우유 사 오기"가 To-Do List에 나타난다.
+        input_box.send_keys(Keys.ENTER)
+        table = self.browser.find_element(By.ID, "id_list_table")
+        rows = table.find_elements(By.TAG_NAME, "tr")
+        self.assertTrue(
+            any(row.text == '1: 시장에서 우유 사기' for row in rows)
+        )
+
 
         # 아직 TextBox가 여전히 있다. 그는 "TDD 공부하기"를 입력하고, 엔터를 누른다
-
+        self.fail("Test is not over")
         # 페이지가 다시 업데이트되고, 두 아이템이 리스트에 나타난다.
 
         # 그는 웹사이트가 이 리스트를 기억하고 있을 지 궁금했다.
