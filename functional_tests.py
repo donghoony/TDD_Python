@@ -16,7 +16,7 @@ class NewVisitorTest(unittest.TestCase):
     def setUp(self) -> None:
         self.browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
                                         options=webdriver.ChromeOptions())
-        self.browser.implicitly_wait(3)
+        self.browser.implicitly_wait(1)
 
     def tearDown(self) -> None:
         self.browser.quit()
@@ -46,7 +46,8 @@ class NewVisitorTest(unittest.TestCase):
         table = self.browser.find_element(By.ID, "id_list_table")
         rows = table.find_elements(By.TAG_NAME, "tr")
         self.assertTrue(
-            any(row.text == '1: 시장에서 우유 사기' for row in rows)
+            any(row.text == '1: 시장에서 우유 사기' for row in rows),
+            "New to-do item not appearing in table" # Make it clearer to check
         )
 
 
