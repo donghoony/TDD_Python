@@ -20,27 +20,30 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.quit()
 
     def test_can_start_a_list_and_retrieve_it_later(self) -> None:
-        # Edith has heard about a cool new online to-do app. She goes
-        # to check out its homepage
+        # 홍길동은 멋진 온라인 To-Do 앱을 들었다. 그는 곧바로 해당 웹 사이트에 방문했다.
         self.browser.get('http://localhost:8000')
 
-        # She notices the page title and header mention to-do lists
+        # 그는 홈페이지의 제목을 확인한다
         self.assertIn("To-Do", self.browser.title)
         # self.fail("Finish the test!") # always fails in here
 
-        # She is invited to enter a to-do item straight away
-        # She types "Buy peacock feathers" into a text box (Edith's hobby
-        # is tying fly-fishing lures)
-        # When she hits enter, the page updates, and now the page lists
-        # "1: Buy peacock feathers" as an item in a to-do list
-        # There is still a text box inviting her to add another item. She
-        # enters "Use peacock feathers to make a fly" (Edith is very methodical)
-        # The page updates again, and now shows both items on her list
-        # Edith wonders whether the site will remember her list. Then she sees
-        # that the site has generated a unique URL for her -- there is some
-        # explanatory text to that effect.
-        # She visits that URL - her to-do list is still there.
-        # Satisfied, she goes back to sleep
+        # 그는 To-Do List에 아이템을 만든다.
+
+        # "시장에서 우유 사기"라는 문장을 TextBox에 작성한다.
+
+        # 그가 Enter를 누르는 순간, 페이지가 업데이트되고 페이지에
+        # "1. 시장에서 우유 사 오기"가 To-Do List에 나타난다.
+
+        # 아직 TextBox가 여전히 있다. 그는 "TDD 공부하기"를 입력하고, 엔터를 누른다
+
+        # 페이지가 다시 업데이트되고, 두 아이템이 리스트에 나타난다.
+
+        # 그는 웹사이트가 이 리스트를 기억하고 있을 지 궁금했다.
+        # 웹사이트에서는 unique URL를 제공하고 있었다.
+        # 그가 제공하는 URL에 접속하자, 그의 리스트가 여전히 존재했다.
+
+        # 안심한 그는 잠에 들 수 있었다.
+        self.browser.quit()
 
 if __name__ == "__main__":
     unittest.main()
